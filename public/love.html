@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<style>
+    .danmu{
+        position: fixed;
+        z-index: 1;
+        background-color: transparent;
+        color: white;
+        font-family: 'Microsoft YaHei';
+        white-space: nowrap;
+        padding: 5px;
+        border-radius: 10px;
+    }
+</style>
+</head>
+<body style="background-color: black; position:relative;">
+        <audio src="xzgn.mp3" autoplay></audio>
+    <canvas id='cavs' style='position:fixed; z-index:-1;'></canvas>
+</body>
+</html>
+<script type="text/javascript">
+var canvas = document.getElementById("cavs");
+const WIDTH = window.innerWidth;
+const HEIGHT = window.innerHeight;
+canvas.setAttribute("width", WIDTH);
+canvas.setAttribute("height", HEIGHT);
+var context = canvas.getContext("2d");
+var start =
+{
+    loves: [],
+    DURATION: 30,
+    begin: function()
+    {
+        this.createLove();
+    },
+    createLove: function()
+    {
+        for (var i = 0; i < WIDTH / 59; i++)
+        {
+            var love = new Love();
+            this.loves.push(love);
+        }
+        setInterval(this.drawLove.bind(this), this.DURATION);
+    },
+    drawLove: function()
+    {
+        context.clearRect(0, 0, WIDTH, HEIGHT);
+        for (var key in this.loves)
+        {
+            this.loves[key].draw();
+        }
+    }
+}
+function Love()
+{
+    var me = this;
+    function rand() 
+    {
+        me.maxScale = (Math.random() * 3.2 + 1.2) * WIDTH / 521;
+        me.curScale = 1.2 * WIDTH / 521;
+        me.x = Math.floor(Math.random() * WIDTH - 40);
+        me.y = Math.floor(HEIGHT - Math.random() * 200);
+        me.ColR = Math.floor(Math.random() * 255);
+        me.ColG = Math.floor(Math.random() * 255);
+        me.ColB = Math.floor(Math.random() * 255);
+        me.alpha = Math.random() * 0.2 + 0.8;
+        me.vector = Math.random() * 5 + 0.4;
+    }
+    (function(){rand();} ());
+    me.draw = function()
+    {
+        if (me.alpha < 0.01) rand();
+        if(me.curScale < me.maxScale) me.curScale += 0.3;
+        x = me.x;
+        y = me.y;
+        scale = me.curScale;
+        context.fillStyle = "rgba(" + me.ColR + "," + me.ColG + "," + me.ColB + "," + me.alpha + ")";
+        context.shadowBlur = 10;
+        context.shadowColor = "rgb(" + me.ColR + "," + me.ColG + "," + me.ColB + ")";
+        context.beginPath();
+        context.bezierCurveTo( x + 2.5*scale, y + 2.5*scale, x + 2.0*scale, y, x, y );
+        context.bezierCurveTo( x - 3.0*scale, y, x - 3.0*scale, y + 3.5*scale,x - 3.0*scale,y + 3.5*scale );
+        context.bezierCurveTo( x - 3.0*scale, y + 5.5*scale, x - 1.0*scale, y + 7.7*scale, x + 2.5*scale, y + 9.5*scale );
+        context.bezierCurveTo( x + 6.0*scale, y + 7.7*scale, x + 8.0*scale, y + 5.5*scale, x + 8.0*scale, y + 3.5*scale );
+        context.bezierCurveTo( x + 8.0*scale, y + 3.5*scale, x + 8.0*scale, y, x + 5.0*scale, y );
+        context.bezierCurveTo( x + 3.5*scale, y, x + 2.5*scale, y + 2.5*scale, x + 2.5*scale, y + 2.5*scale );
+        context.fill();
+        context.closePath();
+        me.y -= me.vector;
+        me.alpha -= (me.vector / 2.9 * 3.5 / HEIGHT);
+    }
+}
+window.onload = function()
+{
+    start.begin();
+    setTimeout("toast()", 2000);
+}
+var pList = [
+    "逛鞋，《疯狂动物城》，第一次约，小激动",
+    "ff搬家",
+    "送花，第一次握着你的手，让我想娶回家",
+    "《我的特工爷爷》，表白失败，仍需努力",
+    "拿伞，《奇幻森林》",
+    "西华路+流花湖+体育西+天河公园，荡秋千，玩一些小孩子的设施，像个孩子一样，多想守护你，背你好累，要锻炼身体啦~",
+    "送钱包，《不二情书》，看到老头子和老太婆在礼堂里，穿着朴素的婚礼福，老头子深情地告白…好想牵着你的手，放在我胸口，感受我对你的心跳",
+    "感冒了，送早餐，没梳头，哈哈哈，在我眼里一样很美",
+    "白云湖，刚开始不知道为什么你心情不好，可我也不知道怎么哄你，坐了摩天轮，上天了",
+    "花城广场，5.20没表白哟",
+    "坐543",
+    "吃小龙虾过敏，凌晨去医院，忙活了一整夜不觉得累",
+    "中大+珠江边+广州塔下+《愤怒的小鸟》~~小雨飘落珠江边，珠江边上你和我，你和我，慢悠悠，逛呀逛到地铁口，挺顺口的哈哈哈，一路上，你轻轻的靠在我的肩头，小情侣呀小情侣",
+    "吃肯德基全家桶+送糖果礼盒，全心全意，独一无二的姚氏爱之糖衣炮弹，boom",
+    "X战警，送了一把扇子",
+    "送粽子，白云湖划船，让我们荡起双桨，小船儿推开波浪…",
+    "荔枝湾，喝茶，上下九，两天都在一起，还有什么比这更美好的呢",
+    "海底总动员",
+    "吃批萨，逛红转厂",
+    "晚上送回家",
+    "阳朔仙境",
+];
+var pCount = 0;
+function toast() {
+    //var div = document.getElementById("movediv");
+    if(pCount > pList.length) return;
+    var text = pList[pCount++];
+    var top = Math.round(Math.random() * 250);
+    var div = document.createElement("div");
+    var tWidth = text.length * 16;
+    var next = false;
+    div.innerHTML = text;
+    div.className = "danmu";
+    div.style.top = top + "px";
+    div.style.right = 0 - tWidth +"px";
+    document.body.appendChild(div);
+    var timer = setInterval(function() {
+        var left = div.offsetLeft;
+        if(left > (0 - tWidth)) {
+            var right = parseInt(div.style.right.replace("px", ""));
+            div.style.right = right + 2 + "px";
+            if(!next && right > 0) {
+                next = true;
+                setTimeout("toast()", 500);
+            }
+        } else {
+            clearInterval(timer);
+            document.body.removeChild(div);
+        }
+    }, 50);
+}
+</script>
