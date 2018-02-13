@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>情人节快乐~</title>
+<title>香香-情人节快乐~</title>
 <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
 <style>
     .danmu{
@@ -14,10 +14,66 @@
         padding: 5px;
         border-radius: 10px;
     }
+    .heart {
+        
+        position: fixed;
+        z-index: -2;
+        width: calc(100% - 15px);
+        animation: change 2s;
+        -moz-animation: change 2s;    
+        -webkit-animation: change 2s;    
+        -o-animation: change 2s;
+        display: none;
+    }
+
+    @keyframes change{
+        from {width: 0px;height: 0px;opacity: 0;}
+        to {width: calc(100% - 15px);opacity: 1;}
+    }
+
+    .starting {
+        position: fixed;
+        color: pink;
+        font-size: 20px;
+        margin: auto;
+        width: 150px;
+        opacity: 0;
+        animation: starting-change 5s;
+        -moz-animation: starting-change 5s;    
+        -webkit-animation: starting-change 5s;    
+        -o-animation: starting-change 5s;
+    }
+    @keyframes starting-change{
+        0% {opacity: 0;}
+        30% {opacity: 1;}
+        60% {opacity: 0;}
+        90% {opacity: 1;}
+        100% {opacity: 0;}
+    }
+    .ending {
+        position: fixed;
+        bottom: 10px;
+        color: pink;
+        font-size: 20px;
+        margin: auto;
+        display: none;
+        width: 150px;
+        opacity: 1;
+        animation: starting-change 5s;
+        -moz-animation: starting-change 5s;    
+        -webkit-animation: starting-change 5s;    
+        -o-animation: starting-change 5s;
+    }
 </style>
 </head>
 <body style="background-color: black; position:relative;">
-        <audio src="jgw.mp3" autoplay></audio>
+        <audio autoplay>
+            <source src="jgw.mp3" type="">
+            <source src="xzgn.mp3" type="">
+        </audio>
+        <div class="starting">很久很久以前</div>
+        <div class="ending">未完待续...</div>
+        <img class="heart" src="o2.jpg" alt="">
     <canvas id='cavs' style='position:fixed; z-index:-1;'></canvas>
 </body>
 </html>
@@ -104,13 +160,13 @@ var pList = [
     "送花，第一次握着你的手，让我想娶回家",
     "《我的特工爷爷》，表白失败，仍需努力",
     "拿伞，《奇幻森林》",
-    "西华路+流花湖+体育西+天河公园，荡秋千，玩一些小孩子的设施，像个孩子一样，多想守护你，背你好累，要锻炼身体啦~",
+    "西华路+流花湖+体育西+天河公园，荡秋千，玩一些小孩子的设施，像个孩子一样，多想守护你，背你好累，我要锻炼身体啦~",
     "送钱包，《不二情书》，看到老头子和老太婆在礼堂里，穿着朴素的婚礼福，老头子深情地告白…好想牵着你的手，放在我胸口，感受我对你的心跳",
-    "感冒了，送早餐，没梳头，哈哈哈，在我眼里一样很美",
-    "白云湖，刚开始不知道为什么你心情不好，可我也不知道怎么哄你，坐了摩天轮，上天了",
+    "感冒了，送早餐，你没梳头，哈哈哈，在我眼里一样很美",
+    "白云湖，刚开始不知道为什么你心情不好，可我也不知道怎么哄你，坐了摩天轮，上天咯",
     "花城广场，5.20没表白哟",
     "坐543",
-    "吃小龙虾过敏，凌晨去医院，忙活了一整夜不觉得累",
+    "吃小龙虾过敏，凌晨去医院，忙活了一整夜都不觉得累",
     "中大+珠江边+广州塔下+《愤怒的小鸟》~~小雨飘落珠江边，珠江边上你和我，你和我，慢悠悠，逛呀逛到地铁口，挺顺口的哈哈哈，一路上，你轻轻的靠在我的肩头，小情侣呀小情侣",
     "吃肯德基全家桶+送糖果礼盒，全心全意，独一无二的姚氏爱之糖衣炮弹，boom",
     "X战警，送了一把扇子",
@@ -119,9 +175,16 @@ var pList = [
     "海底总动员",
     "吃批萨，逛红转厂",
     "晚上送回家",
-    "阳朔仙境",
+    "阳朔仙境，第一次二人世界，啦啦啦~",
+    "喜洋洋看成龙的绝地逃亡，电影不怎么样，但是芒果干好吃，你好美，然后在小河边谈了好久，我给你讲了林徽因的情事，并不是我支持她朝三暮四，而是想说，在自己婚姻不幸福时，努力过后仍没有好转，可以选择另一种生活方式，你不欠任何人一份感情",
+    "夜游珠江，不知为何，刚开始对我很是抵触，自己一个人跑去玩…慢慢的心情就好了，摄影大哥给我们拍了照，本想就一张你的照片的，结果你全抢去了",
+    "送你回家，在地铁上站着没有座位，你安静地靠着我的胸膛，如果能一辈子给你靠着，该有多好",
+    "晚上给你打电话，每次和你聊天，就有好多好多的话说，不知不觉就聊了3个多小时，歌唱的好听咩～",
+    "给你买了玫瑰花茶养身子，可是你在家不能送给你"
 ];
+
 var pCount = 0;
+var finished = 0;
 function toast() {
     //var div = document.getElementById("movediv");
     if(pCount > pList.length) return;
@@ -147,6 +210,13 @@ function toast() {
         } else {
             clearInterval(timer);
             document.body.removeChild(div);
+            finished++;
+            if(finished == pList.length) {
+                var heart = document.querySelector(".heart");
+                var ending = document.querySelector(".ending");
+                heart.style.display = 'block';
+                ending.style.display = 'block';
+            }
         }
     }, 50);
 }
