@@ -11,8 +11,21 @@
         color: white;
         font-family: 'Microsoft YaHei';
         white-space: nowrap;
-        padding: 5px;
+        padding: 5px 10px;
         border-radius: 10px;
+        border-bottom: 1px solid red;
+    }
+    .danmu:before {
+        position: absolute;
+        top: 0;
+        left: -22px;
+        content: url(heart.png);
+    }
+    .danmu::after {
+        position: absolute;
+        top: 0;
+        right: -22px;
+        content: url(heart.png);
     }
     .heart {
         
